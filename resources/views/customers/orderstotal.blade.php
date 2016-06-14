@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="row">
+
 @if(count($countordersbyCustomers)==0)
 <div class="alert alert-info col-lg-12">
 	<strong>No Orders of any Customer!</strong> There are no confirmed orders from any customer.
@@ -28,5 +28,5 @@
 	@endforeach	
 @endif
 
-</div>
+
 @stop	

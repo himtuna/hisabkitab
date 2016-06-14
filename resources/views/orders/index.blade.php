@@ -1,7 +1,7 @@
 @extends('layouts.master')
-
+@section('page_title', ucwords(Request::segment(2)).' Orders')
 @section('content')
-<div class="row">
+
 	@if(count($orders) == 0)
 		
 		<div class="alert alert-info col-lg-12">
@@ -40,5 +40,5 @@
 		</div>
 		@endforeach
 	@endif
-</div>
+
 @stop

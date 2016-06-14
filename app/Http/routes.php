@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/test-theme', function(){
+	return view('layouts.master');
+});
 
 Route::get('orders/add','OrdersController@add');
 Route::post('orders/add','OrdersController@storeorder');

@@ -1,8 +1,7 @@
 @extends('layouts.master')
-
+@section('page_title', 'Products')
 @section('content')
-<div class="col-lg-12">
-	<div class="panel panel-primary">
+<div class="panel panel-primary">
 		<div class="panel-heading">Products</div>
 		<div class="panel-body">	
 
@@ -32,9 +31,7 @@
 			</table>	
 		</div>
 	</div>	
-</div>
 
-	<div class="col-lg-12">
 		<div class="panel panel-default">
 			<div class="panel-heading">Add new product</div>
 			<div class="panel-body">	
@@ -79,7 +76,5 @@
 
 			</div>
 		</div>
-
-	</div>
-
+	
 @endsection

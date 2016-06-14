@@ -1,8 +1,8 @@
 @extends('layouts.master')
-
+@section('page_title', 'Orders by '.$customer->name)
 @section('content')
 
-<div class="col-lg-12">
+
 	<div class="panel panel-primary">
 		<div class="panel-heading">Orders by {{$customer->name}}</div>
 		<div class="panel-body">	
@@ -42,5 +42,5 @@
 				
 		</div>
 	</div>
-</div>
+
 @stop	

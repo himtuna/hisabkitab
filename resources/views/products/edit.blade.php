@@ -1,9 +1,10 @@
 @extends('layouts.master')
+@section('page_title','Edit '. $product->name .' product')
 
 @section('content')
-<div class="col-lg-12">
+
 		<div class="panel panel-default">
-			<div class="panel-heading">Add new product</div>
+			<div class="panel-heading">Edit {{$product->name}} product</div>
 			<div class="panel-body">	
 			@if(count($errors))
 			@foreach($errors->all() as $error)
@@ -48,8 +49,5 @@
 
 			</div>
 	</div>
-</div>
-
-	
 
 @endsection

@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 <div class="panel @if($order->order_status == 'paid' || $order->invoice_received == 'Yes') panel-primary
 		@elseif($order->order_status == 'draft') panel-default 
