@@ -15,9 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test-theme', function(){
-	return view('layouts.master');
-});
 
 Route::get('orders/add','OrdersController@add');
 Route::post('orders/add','OrdersController@storeorder');
@@ -48,3 +45,6 @@ Route::resource('products','ProductsController');
 Route::resource('customers','CustomersController');
 Route::resource('prices','PricesController');
 Route::resource('customers','CustomersController');
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
