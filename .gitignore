@@ -4,5 +4,5 @@
 Homestead.yaml
 Homestead.json
 .env
-/.well-known
+/public/.well-known
 favicon.gif
