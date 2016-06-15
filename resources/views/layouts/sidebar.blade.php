@@ -44,7 +44,7 @@
         <li class="treeview {!! Request::is('orders/*') ? 'active' : '' !!}">
           <a href="#"><i class="fa fa-link"></i> <span>Invoices</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li class="{!! Request::is('invoices/add') ? 'active' : '' !!}"><a href="{{url('orders/confirmed')}}">Add new Invoice</a></li>
+            <li class="{!! Request::is('invoices/add') ? 'active' : '' !!}"><a href="{{url('invoices/add')}}">Add new Invoice</a></li>
             <li class="{!! Request::is('orders/confirmed') ? 'active' : '' !!}"><a href="{{url('orders/confirmed')}}">Dispatched Invoices</a></li>
             <li class="{!! Request::is('orders/received') ? 'active' : '' !!}"><a href="{{url('orders/received')}}">Received Invoices</a></li>
             <li class="{!! Request::is('orders/lost') ? 'active' : '' !!}"><a href="{{url('orders/lost')}}">Lost Invoices</a></li>
