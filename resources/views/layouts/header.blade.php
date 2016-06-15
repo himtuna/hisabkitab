@@ -2,7 +2,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="{{url('')}}" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>HS</b>KT</span>
       <!-- logo for regular state and mobile devices -->
@@ -117,8 +117,7 @@
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a href="{{ url('/login') }}">Login</a></li>                       
             @else
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->

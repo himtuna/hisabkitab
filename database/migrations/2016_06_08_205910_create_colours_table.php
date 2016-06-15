@@ -16,8 +16,8 @@ class CreateColoursTable extends Migration
             //
             $table->increments('id');
             $table->string('name');
-            $table->string('name_hi');
-            $table->string('code');
+            $table->string('name_hi')->nullable();
+            $table->string('code')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateColoursTable extends Migration
      */
     public function down()
     {
-        Schema::drop('colourse');
+        Schema::drop('colours');
     }
 }

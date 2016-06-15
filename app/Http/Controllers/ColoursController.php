@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\Product;
+use App\Colour;
 
-class ProductsController extends Controller
+class ColoursController extends Controller
 {
 
     public function __construct()
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -24,8 +24,8 @@ class ProductsController extends Controller
     public function index()
     {
         //
-        $products= Product::all();
-        return view('products.index', compact('products'));
+        $colours = Colour::all();
+        return view('colours.index', compact('colours'));
     }
 
     /**
@@ -47,26 +47,19 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //
-        $product = new Product;
+        $colour = new Colour;
 
         $this->validate($request, [
-            'product_name' => 'required',
-            'category' => 'required',
-            'packaging_type' => 'required',
-            'pack_units' => 'required',
-            'unit_pieces' => 'required',
-            'unit_price' =>'required|min:1'
+            'colour_name' =>'required',
         ]);
 
-        $product->name = $request->product_name;
-        $product->category = $request->category;
-        $product->packaging_type = $request->packaging_type;
-        $product->pack_units = $request->pack_units;
-        $product->unit_pieces = $request->unit_pieces;
-        $product->unit_price = $request->unit_price;        
-        $product->save();
+        $colour->name = $request->colour_name;
+        $colour->name_hi = $request->colour_name_hi;
+        $colour->code = $request->code;
+        
+        $colour->save();
 
-        return back();
+        return redirect(url('colours'));
     }
 
     /**
@@ -78,6 +71,7 @@ class ProductsController extends Controller
     public function show($id)
     {
         //
+       
     }
 
     /**
@@ -89,8 +83,8 @@ class ProductsController extends Controller
     public function edit($id)
     {
         //
-        $product = Product::find($id);
-        return view('products.edit', compact('product'));
+        $colour = Colour::find($id);
+        return view('colours.edit', compact('colour'));
     }
 
     /**
@@ -103,17 +97,13 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $product = Product::find($id);
-        // $product->update($request->all());
+        $colour = Colour::find($id);
+        $colour->name = $request->colour_name;
+        $colour->name_hi = $request->colour_name_hi;
+        $colour->code = $request->code;
 
-        $product->name = $request->product_name;
-        $product->category = $request->category;
-        $product->packaging_type = $request->packaging_type;
-        $product->pack_units = $request->pack_units;
-        $product->unit_pieces = $request->unit_pieces;
-        $product->unit_price = $request->unit_price;        
-        $product->save();
-        return redirect('/products');
+        $colour->update();
+        return redirect(url('colours'));
     }
 
     /**

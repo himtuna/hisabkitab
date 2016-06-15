@@ -40,7 +40,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">Add new order</div>
+			<div class="panel-heading">Add new invoice</div>
 			<div class="panel-body">
 			@if(count($errors))
 				@foreach($errors->all() as $error)
@@ -132,7 +132,7 @@
 								<td>
 									<input type="number" min="1" name="qty[]" class="qty form-control">
 								</td>
-								<td><a href="#" class="btn btn-danger delOrderline">X</a></td>
+								<td></td>
 								</tr>
 							</tbody>
 						</table>

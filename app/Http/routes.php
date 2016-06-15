@@ -45,6 +45,7 @@ Route::resource('products','ProductsController');
 Route::resource('customers','CustomersController');
 Route::resource('prices','PricesController');
 Route::resource('customers','CustomersController');
+Route::resource('colours','ColoursController');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');

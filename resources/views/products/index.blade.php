@@ -52,7 +52,8 @@
 					<div class="form-group form-inline">
 					<label for="phone">Packaging Type: </label>
 						<select name="packaging_type" class="form-control">
-							<option value="Dibbi" selected="selected">Dibbi</option>
+							<option disabled selected value>-select packaging type-</option>
+							<option value="Dibbi">Dibbi</option>
 							<option value="Thaili">Thaili</option>
 						</select>
 					</div>

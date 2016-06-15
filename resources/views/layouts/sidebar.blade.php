@@ -36,21 +36,34 @@
         <li class="treeview {!! Request::is('orders/*') ? 'active' : '' !!}">
           <a href="#"><i class="fa fa-link"></i> <span>Orders</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li class="{!! Request::is('orders/add') ? 'active' : '' !!}"><a href="/orders/add">New Order</a></li>
-            <li class="{!! Request::is('orders/confirmed') ? 'active' : '' !!}"><a href="/orders/draft">Draft Orders</a></li>
-            <li class="{!! Request::is('orders/confirmed') ? 'active' : '' !!}"><a href="/orders/confirmed">Confirmed Orders</a></li>
-            <li class="{!! Request::is('orders/received') ? 'active' : '' !!}"><a href="/orders/received">Recevieved Orders</a></li>
-            <li class="{!! Request::is('orders/lost') ? 'active' : '' !!}"><a href="/orders/lost">Lost Orders</a></li>
+            <li class="{!! Request::is('orders/add') ? 'active' : '' !!}"><a href="{{url('orders/add')}}">New Order</a></li>
+            <li class="{!! Request::is('orders/draft') ? 'active' : '' !!}"><a href="{{url('orders/draft')}}">Draft Orders</a></li>            
           </ul>
         </li>
+
+        <li class="treeview {!! Request::is('orders/*') ? 'active' : '' !!}">
+          <a href="#"><i class="fa fa-link"></i> <span>Invoices</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <ul class="treeview-menu">
+            <li class="{!! Request::is('invoices/add') ? 'active' : '' !!}"><a href="{{url('orders/confirmed')}}">Add new Invoice</a></li>
+            <li class="{!! Request::is('orders/confirmed') ? 'active' : '' !!}"><a href="{{url('orders/confirmed')}}">Dispatched Invoices</a></li>
+            <li class="{!! Request::is('orders/received') ? 'active' : '' !!}"><a href="{{url('orders/received')}}">Received Invoices</a></li>
+            <li class="{!! Request::is('orders/lost') ? 'active' : '' !!}"><a href="{{url('orders/lost')}}">Lost Invoices</a></li>
+         </ul>
+        </li> 
         <li class="treeview {!! Request::is('customers/*') ? 'active' : '' !!} {!! Request::is('customers') ? 'active' : '' !!}">
           <a href="#"><i class="fa fa-link"></i> <span>Customers</span> <i class="fa fa-angle-left pull-right"></i></a>
             <ul class="treeview-menu">
-            <li class="{!! Request::is('customers') ? 'active' : '' !!}"><a href="/customers">All Customers</a></li>           
-            <li class="{!! Request::is('customers/orderstotal') ? 'active' : '' !!}"><a href="/customers/orderstotal">Orders Total</a></li>           
+            <li class="{!! Request::is('customers') ? 'active' : '' !!}"><a href="{{url('customers')}}">All Customers</a></li>           
+            <li class="{!! Request::is('customers/orderstotal') ? 'active' : '' !!}"><a href="{{url('customers/orderstotal')}}">Orders Total</a></li>           
           </ul>
         </li>
-        <li class="{!! Request::is('products') ? 'active' : '' !!}"><a href="/products"><i class="fa fa-link"></i> <span>Products</span></a></li>
+        <li class="tree view {!! Request::is('products') ? 'active' : '' !!} {!! Request::is('colours') ? 'active' : '' !!}">
+        <a href="#"><i class="fa fa-link"></i> <span>Products</span></a>
+        <ul class="treeview-menu">
+            <li class="{!! Request::is('products') ? 'active' : '' !!}"><a href="{{url('products')}}">All Products</a></li>
+            <li class="{!! Request::is('colours') ? 'active' : '' !!}"><a href="{{url('colours')}}">Colours codes</a></li>           
+          </ul>
+        </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

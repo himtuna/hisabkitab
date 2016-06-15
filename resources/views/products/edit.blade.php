@@ -24,7 +24,7 @@
 					<div class="form-group form-inline">
 					<label for="phone">Packaging Type: </label>
 						<select name="packaging_type" class="form-control">
-						<option disabled selected value>-select packagin type-</option>
+						<option disabled selected value>-select packaging type-</option>
 							<option value="Dibbi" @if($product->packaging_type == "Dibbi") selected="selected" @endif>Dibbi</option>
 							<option value="Thaili" @if($product->packaging_type == "Thaili") selected="selected" @endif>Thaili</option>
 						</select>
