@@ -162,7 +162,16 @@ public function addinvoice()
         $order->invoice_received = $request->invoice_received;
       }
 
-
+      $hisab = Hisab::where('party_id','=',$order->customer_id)->where('status','=','ongoing')->first();
+        
+        if($hisab == Null){
+          $hisab = new Hisab;
+          $hisab->party_id = $order->customer_id;
+          $hisab->status = "ongoing";
+          $hisab->save();
+          $order->hisab_id = $hisab->id;
+        }
+        else $order->hisab_id = $hisab->id;  
 
       $order->save();
     
@@ -243,6 +252,7 @@ public function addinvoice()
         $order->invoice_received = "No";
 
         $hisab = Hisab::where('party_id','=',$order->customer_id)->where('status','=','ongoing')->first();
+
         if($hisab == Null){
           $hisab = new Hisab;
           $hisab->party_id = $order->customer_id;
@@ -291,7 +301,7 @@ public function addinvoice()
     	$order = Order::find($order);
     	$order->order_status = "confirmed";
 
-      
+
         $order->update();
         return redirect('/order/'.$order->id);
     } 

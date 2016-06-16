@@ -12,7 +12,7 @@ class Order extends Model
 
     public function orderlines()
 	{
-		return $this->hasMany(Orderline::class);
+		return $this->hasMany(Orderline::class)->orderby('product_id');
 	}
 
 
@@ -31,7 +31,7 @@ class Order extends Model
 
     public function productstotal()
     {   
-        $total = array(0 =>0, 1=>0,2=>0,3=>0,4=>0);
+        $total = array(0 =>0, 1=>0,2=>0,3=>0,4=>0,5=>0); // manual get rid of this
         // $count($this->orderlines);
         foreach($this->orderlines as $orderline){
             $total[$orderline->product_id]+=$orderline->units;            
