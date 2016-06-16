@@ -14,9 +14,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('order_created_on');
-            $table->date('invoice_date');
             $table->integer('customer_id')->unsigned()->index();
+            $table->integer('hisab_id')->unsigned()->index()->nullable();
+            $table->date('order_created_on');
+            $table->date('invoice_date');            
             $table->enum('order_status', ['draft', 'confirmed','paid']);
             $table->enum('invoice_received', ['No', 'Yes','Lost']);
             // $table->boolean('invoice_received');

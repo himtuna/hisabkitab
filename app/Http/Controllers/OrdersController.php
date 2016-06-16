@@ -10,6 +10,8 @@ use App\Order;
 
 use App\Orderline;
 
+use App\Hisab;
+
 use DB;
 
 class OrdersController extends Controller
@@ -188,8 +190,9 @@ public function addinvoice()
    {
    		// $order->load('orderlines.customer');
    		$order = Order::find($order);
-   		return view('orders.show', compact('order'));
-   		// var_dump($order);
+   		// var_dump($order); exit();
+      return view('orders.show', compact('order'));
+   		
    }
 
   
@@ -239,6 +242,16 @@ public function addinvoice()
 
         $order->invoice_received = "No";
 
+        $hisab = Hisab::where('party_id','=',$order->customer_id)->where('status','=','ongoing')->first();
+        if($hisab == Null){
+          $hisab = new Hisab;
+          $hisab->party_id = $order->customer_id;
+          $hisab->status = "ongoing";
+          $hisab->save();
+          $order->hisab_id = $hisab->id;
+        }
+        else $order->hisab_id = $hisab->id;
+
         $order->update();
         return back();
       }
@@ -277,6 +290,8 @@ public function addinvoice()
     {	
     	$order = Order::find($order);
     	$order->order_status = "confirmed";
+
+      
         $order->update();
         return redirect('/order/'.$order->id);
     } 

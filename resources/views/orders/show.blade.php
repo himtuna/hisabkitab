@@ -36,7 +36,7 @@
 				@endif
 				@if($order->order_status == 'draft')
 						<hr>
-						<label for="confirm_order">Confirm order: </label><input type="checkbox" name="confirm_order" aria-label="confirm order" class="form-control" required="required"></input>
+						<label for="confirm_order">Confirm order: </label><input type="checkbox" name="confirm_order" aria-label="confirm order" class="" required="required"></input>
 						
 				@elseif($order->order_status == 'confirmed')
 					<label for="invoice_received">Invoice Received: </label>
@@ -88,8 +88,10 @@
 		</div>
 
 	</div>
-
-	<div class="panel-footer">Record created at: {{$order->created_at}}. <em class="pull-right">Last updated at: {{$order->updated_at}}</em></div>
+	
+	<div class="panel-footer"> @if($order->order_status !="draft")
+		<a href="{{url('hisab/'.$order->hisab_id)}}">Hisab #{{$order->hisab_id}}</a> |
+	@endif Record created at: {{$order->created_at}}. <em class="pull-right">Last updated at: {{$order->updated_at}}</em></div>
 </div>
 
 @stop

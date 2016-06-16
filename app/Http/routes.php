@@ -49,3 +49,7 @@ Route::resource('colours','ColoursController');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+
+Route::resource('payments/receivable','PaymentsReceivableController');
+Route::resource('hisab','HisabsController');

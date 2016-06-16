@@ -21,6 +21,6 @@ class Orderline extends Model
     {
     	return $this->belongsTo(Colour::class);
     }
-   
 
+    
 }

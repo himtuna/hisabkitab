@@ -11,6 +11,11 @@ class Customer extends Model
 		return $this->hasMany(Order::class);
 	}
 
+	public function hisabs()
+	{
+		// return $this->hasMany(Hisab::class);
+		return $this->hasMany('App\Hisab','id','party_id');
+	}
 /*	public function prices()
 	{
 		return $this->hasMany(Price::class);
