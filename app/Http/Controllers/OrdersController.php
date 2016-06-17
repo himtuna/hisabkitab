@@ -305,7 +305,6 @@ public function addinvoice()
         $order->update();
         return redirect('/order/'.$order->id);
     } 
-  
-    
+      
    
 }

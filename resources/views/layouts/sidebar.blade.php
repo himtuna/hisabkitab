@@ -70,7 +70,8 @@
         <a href="#"><i class="fa fa-link"></i> <span>Products</span></a>
         <ul class="treeview-menu">
             <li class="{!! Request::is('products') ? 'active' : '' !!}"><a href="{{url('products')}}">All Products</a></li>
-            <li class="{!! Request::is('colours') ? 'active' : '' !!}"><a href="{{url('colours')}}">Colour codes</a></li>           
+            <li class="{!! Request::is('colours') ? 'active' : '' !!}"><a href="{{url('colours')}}">Colour codes</a></li>
+            <li class="{!! Request::is('prices') ? 'active' : '' !!}"><a href="{{url('prices')}}">Prices for Customers</a></li>           
           </ul>
         </li>
       </ul>

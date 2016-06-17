@@ -1,38 +1,42 @@
 @extends('layouts.master')
 
 @section('content')
-
-<div class="col-lg-12">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Default Prices</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">Prices for Customers</div>
 		<div class="panel-body">	
-
 			<table class="table table-bordered table-hover Orderline-table">
-			<th>#</th>
-			<th>Product</th>
-			<th>Packaging Type</th>
-			<th>Price</th>
-			<th>Last updated</th>
-			
+			<thead>
+			<th></th>
+			@foreach($products as $product)
+				<th>{{$product->name}} {{$product->packaging_type}}</th>
+			@endforeach
+			<th></th>
+			<tr>
+			<th>Default Price</th>
+			@foreach($products as $product)
+				<th>Rs. {{$product->unit_price}}</th>				
+			@endforeach
+			<td><a href="{{url('products')}}"><i class="fa fa-cog"></i></a></td>
+			</tr>
+			</thead>
 			<tbody>
-				@foreach($products as $product)
-				<tr>
-					<td></td>
-					<td>{{$product->name}}</td>
-					<td>{{$product->packaging_type}}</td>
-					<td>Rs. {{$product->unit_price}}</td>
-					<td>{{$product->updated_on}}</td>
-				</tr>
+
+				@foreach($customers as $customer)
+					<tr>
+						<th>{{$customer->name}}</th>
+						@foreach($products as $product)
+						<td>@if(NULL !==$product->price($customer))
+								Rs. {{$product->price($customer)}}
+								@else <span style="color:blue">Rs. {{$product->unit_price}}</span>
+								@endif								
+						</td>
+						@endforeach
+						<td><a href="{{url('products')}}"><i class="fa fa-pencil-square-o"></i></a></td>
+					</tr>
 				@endforeach
 			</tbody>
 			</table>
-
-			@foreach($unit_prices as $unit_price)
-				Price: {{$unit_price->unit_price}}<br>
-			@endforeach
-		</div>
 	</div>
+	<div class="panel-footer"><span style="color:blue">Prices in <em>blue</em> for customers are default prices.</span></div>
 </div>
-
-
 @stop

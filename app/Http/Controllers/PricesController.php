@@ -28,10 +28,10 @@ class PricesController extends Controller
         //
         $products = Product::all();
         $customers = Customer::all();
-        $unit_prices = Price::all()->where('isdefault',1)->groupby('customer_id');
         // var_dump($unit_prices); exit();
-        return view('prices.index',compact('products','customers','unit_prices'));
+        return view('prices.index',compact('products','customers'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -41,6 +41,10 @@ class PricesController extends Controller
     public function create()
     {
         //
+        $products = Product::all();
+        $customers = Customer::all();
+        // var_dump($unit_prices); exit();
+        return view('prices.create',compact('products','customers'));
     }
 
     /**
@@ -52,6 +56,23 @@ class PricesController extends Controller
     public function store(Request $request)
     {
         //
+
+        $this->validate($request, [
+            'customer_id' => 'required',
+            'product_id' => 'required',            
+            'unit_price' => 'required',
+        ]);
+
+        $price =  new Price;
+
+        $price->product_id = $request->product_id;
+        $price->customer_id = $request->customer_id;        
+        $price->unit_price = $request->unit_price;
+        $price->isdefault = 1;
+
+        $price->save();
+
+        return redirect('prices');
     }
 
     /**

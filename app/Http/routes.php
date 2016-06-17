@@ -53,4 +53,5 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('payments/receivable','PaymentsReceivableController');
 Route::get('payments/{payment}','PaymentsController@show');
+
 Route::resource('hisab','HisabsController');
