@@ -20,10 +20,5 @@ class Customer extends Model
 	// {
 	// 	return $this->hasMany(Price::class);
 	// }	
-	public function prices(Customer $customer)
-    {   
-
-        $unit_prices = Price::all()->where('isdefault',1)->where('customer_id',$customer->id);
-        return $this->unit_prices;
-    }
+	
 }
