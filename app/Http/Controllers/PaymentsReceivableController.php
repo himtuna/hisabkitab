@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use App\Customer;
 use App\Payment;
+use App\Hisab;
 
 class PaymentsReceivableController extends Controller
 {
@@ -25,9 +26,10 @@ class PaymentsReceivableController extends Controller
     {
         //
         $customers = Customer::all();
-        $payements = Payment::all()->where('type', 'receivable');
+        $payments = Payment::all()->where('type', 'receivable');
 
-        return view('payements.receivable.index',compact('customers','payements');
+        // return view('payments.index',compact('customers','payements'));
+        return view('payments.receivable.index', compact('customers','payments'));
 
     }
 
@@ -39,6 +41,9 @@ class PaymentsReceivableController extends Controller
     public function create()
     {
         //
+        $customers = Customer::all();
+
+        return view('payments.receivable.create',compact('customers'));
     }
 
     /**
@@ -50,6 +55,33 @@ class PaymentsReceivableController extends Controller
     public function store(Request $request)
     {
         //
+
+         $this->validate($request, [
+            'customer_id' => 'required',
+            'date' => 'required',
+            'amount' => 'required'
+        ]);
+
+        $payment = new Payment;
+        $payment->party_id = $request->customer_id;
+        $payment->date = $request->date;
+        $payment->debit = $request->amount; // Debit Cash Payments | Payment Received
+        $payment->type = "receivable";
+
+        $hisab = Hisab::where('party_id','=',$request->customer_id)->where('status','=','ongoing')->first();
+        
+        if($hisab == Null){
+          $hisab = new Hisab;
+          $hisab->party_id = $request->customer_id;
+          $hisab->status = "ongoing";
+          $hisab->save();
+          $payment->hisab_id = $hisab->id;
+        }
+        else $payment->hisab_id = $hisab->id;  
+
+        $payment->save();
+
+        return redirect('payments/receivable');
         
     }
 

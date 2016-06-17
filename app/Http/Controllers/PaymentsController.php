@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
+use App\Payment;
+
 class PaymentsController extends Controller
 {
      public function __construct()
@@ -53,6 +55,28 @@ class PaymentsController extends Controller
     public function show($id)
     {
         //
+        $payment = Payment::find($id);
+
+        switch ($payment->type) {
+            case 'receivable':
+                    return view('payments.receivable.show',compact('payment'));
+                break;
+            case 'payable':
+                # code...
+                break;
+            case 'expense':
+                # code...
+                break;
+            case 'expense':
+                # code...
+                break;    
+            
+            default:
+                # code...
+                break;
+        }
+
+
     }
 
     /**

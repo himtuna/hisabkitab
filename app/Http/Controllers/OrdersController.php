@@ -166,7 +166,7 @@ public function addinvoice()
         
         if($hisab == Null){
           $hisab = new Hisab;
-          $hisab->party_id = $order->customer_id;
+          $hisab->party_id = $request->customer_id;
           $hisab->status = "ongoing";
           $hisab->save();
           $order->hisab_id = $hisab->id;

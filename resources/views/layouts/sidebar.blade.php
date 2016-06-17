@@ -57,6 +57,15 @@
             <li class="{!! Request::is('customers/orderstotal') ? 'active' : '' !!}"><a href="{{url('customers/orderstotal')}}">Orders Total</a></li>           
           </ul>
         </li>
+
+        <li class="treeview {!! Request::is('payments/*') ? 'active' : '' !!} {!! Request::is('customers') ? 'active' : '' !!}">
+          <a href="#"><i class="fa fa-link"></i> <span>Payments</span> <i class="fa fa-angle-left pull-right"></i></a>
+            <ul class="treeview-menu">
+            <li class="{!! Request::is('payments/receivable') ? 'active' : '' !!}"><a href="{{url('payments/receivable')}}">Receivables</a></li>           
+            <li class="{!! Request::is('payments/payable') ? 'active' : '' !!}"><a href="{{url('payments/payable')}}">Payables</a></li>           
+          </ul>
+        </li>
+
         <li class="tree view {!! Request::is('products') ? 'active' : '' !!} {!! Request::is('colours') ? 'active' : '' !!}">
         <a href="#"><i class="fa fa-link"></i> <span>Products</span></a>
         <ul class="treeview-menu">

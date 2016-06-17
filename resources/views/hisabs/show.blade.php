@@ -16,6 +16,8 @@
 			Hisab ID: {{$hisab->id}}<br>
 			Hisab Status: {{$hisab->status}} <br>
 			Party Name: {{$hisab->customer->name}}<br>
+
+			<?php $debit=0; $credit=0;?>
 		</div>
 
 	</div>
@@ -28,9 +30,9 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<th>ID</th>
-					<th>Date</th>
+					<th class="col-sm-2">Date</th>
 					<th>Particulars</th>
-					<th>Amount</th>
+					<th class="col-sm-2">Amount</th>
 				</thead>
 			
 			<tbody>
@@ -63,14 +65,15 @@
 					@endforeach
 					</div>
 					</td>
-					<th>Rs. {{$amount}}</tg>
+					<th>Rs. {{$amount}}</th>
+					<?php $credit+=$amount; ?>
 				</tr>
 				@endforeach
 			</tbody>
 			</table>
 
 			</div>
-			<div class="panel-footer">Total Orders: {{count($hisab->orders)}}</div>
+			<div class="panel-footer">Total Orders: {{count($hisab->orders)}} <span class="pull-right">Credit Total = Rs. {{$credit}}</span></div>
 		</div>
 	</div>
 
@@ -78,8 +81,29 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Payments</div>
 		<div class="panel-body">
-			testngs
+			<table class="table table-bordered table-hover">
+				<thead>
+					<th>ID</th>
+					<th>Date</th>
+					<th>Amount</th>
+				</thead>
+				<tbody>
+					@foreach($hisab->payments as $payment)
+						<tr>
+							<td>
+							<a href="{{url('payments/'.$payment->id)}}">
+							{{$payment->id}}</a></td>
+							<td>
+							<a href="{{url('payments/'.$payment->id)}}">
+							{{$payment->date}}</a></td>
+							<th>Rs. {{$payment->debit}}</th>
+							<?php $debit+=$payment->debit; ?>
+						</tr>
+					@endforeach
+				</tbody>
+			</table>
 		</div>
+		<div class="panel-footer">Total Payments: {{count($hisab->payments)}} <span class="pull-right">Debit Total = Rs. {{$debit}}</span> </div>
 
 	</div>
 	</div>

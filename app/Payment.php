@@ -10,6 +10,7 @@ class Payment extends Model
     public function hisab()
     {
         return $this->belongsTo(Hisab::class);
+        // return $this->belongsTo('App\Hisab','id');
     }
 
    	public function customer()
