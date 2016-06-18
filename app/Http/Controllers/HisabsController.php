@@ -79,9 +79,22 @@ class HisabsController extends Controller
         //
         $hisab = Hisab::find($id);
         $products = Product::all();
+        if($hisab->status == "ongoing"){
+            $hisab->credit = 0;
+            $hisab->debit = 0;
+            foreach($hisab->orders as $order) {
+                $hisab->credit += $order->amount;
+            }
+            foreach($hisab->payments as $payment) {
+                $hisab->debit += $payment->debit;
+            }
+            $hisab->save();
+        }
+
         return view('hisabs.show',compact('hisab','products'));
     }
 
+      
     /**
      * Show the form for editing the specified resource.
      *

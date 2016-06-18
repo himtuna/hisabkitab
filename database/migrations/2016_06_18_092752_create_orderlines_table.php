@@ -17,8 +17,10 @@ class CreateOrderlinesTable extends Migration
             $table->integer('order_id')->unsigned()->index();
             $table->integer('product_id')->unsigned()->index();
             $table->integer('colour_id')->unsigned()->index()->nullable(); //Make it Null
-            $table->smallInteger('units');
-            $table->tinyInteger('unit_price'); //price per unit (Dibbi)            
+            $table->smallInteger('units')->unsigned(); //units
+            $table->tinyInteger('unit_price')->unsigned(); //price per unit (Dibbi) Should be less
+            $table->smallInteger('sub_amount')->unsigned(); //orderlineamount
+
             $table->timestamps();
         });
     }

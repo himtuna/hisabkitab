@@ -17,7 +17,8 @@
 		<div class="panel-body">
 			<table class="table table-bordered table-hover">
 				<thead>
-					<th>ID</th>
+					<th class="col-sm-1">Payment ID</th>
+					<th>Hisab ID</th>
 					<th>Date</th>
 					<th>Customer</th>
 					<th>Amount</th>
@@ -25,7 +26,8 @@
 				<tbody>
 					@foreach($payments as $payment)
 						<tr>
-							<td>{{$payment->id}}</td>
+							<td><a href="{{url('payments/'.$payment->id)}}">{{$payment->id}}</a></td>
+							<td><a href="{{url('hisab/'.$payment->hisab_id)}}">Hisab #{{$payment->hisab_id}}</a></td>
 							<td>{{$payment->date}}</td>
 							<td>{{$payment->customer->name}}</td>
 							<td>Rs. {{$payment->debit}}</td>

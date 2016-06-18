@@ -16,8 +16,9 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->integer('customer_id')->unsigned()->index();
             $table->integer('hisab_id')->unsigned()->index()->nullable();
-            $table->date('order_created_on');
-            $table->date('invoice_date');            
+            $table->date('order_created_on'); //change this to order_submitted_date
+            $table->date('invoice_date');
+            $table->smallInteger('amount')->unsigned(); //orderlineamount
             $table->enum('order_status', ['draft', 'confirmed','paid']);
             $table->enum('invoice_received', ['No', 'Yes','Lost']);
             // $table->boolean('invoice_received');

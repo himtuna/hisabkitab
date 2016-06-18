@@ -12,6 +12,10 @@ use App\Orderline;
 
 use App\Hisab;
 
+use App\Product;
+
+use App\Customer;
+
 use DB;
 
 class OrdersController extends Controller
@@ -77,12 +81,12 @@ public function addinvoice()
 
       ]);
 
+      $products = Product::all();
+      $customer = Customer::find($request->customer_id);
       $order = new Order;
    		$order->customer_id = $request->customer_id;
 
-      if($request->is('orders/add'))
-      {   
-        
+            
         if($request->order_created_on=="0000-00-00")
           $order->order_created_on = date('Y-m-d');
         else 
@@ -90,27 +94,15 @@ public function addinvoice()
         
         $order->invoice_received = "0000-00-00";
         $order->order_status = 'draft';    
-   		}
-      elseif($request->is('invoices/add'))
-      {  
-             
-        if($request->invoice_date=="0000-00-00")
-          $order->invoice_date = date('Y-m-d');   
-        else 
-          $order->invoice_date  = $request['order_created_on'];
-        
-        $order->order_created_on = $order->invoice_date;
-        $order->order_status = 'confirmed';
-        $order->invoice_received = $request->invoice_received;
-      }
-
-
-
+   	    $order->amount =0;
+      
    		$order->save();
  		
  		 // var_dump(count($post['orderline']));
-
+      
    		for ($i=0; $i < count($post['product_id']); $i++) { 
+        $product_price = 0;
+
    			$orderline = new Orderline;
    			$orderline->order_id = $order->id;
    			$orderline->product_id = $post['product_id'][$i];
@@ -120,7 +112,21 @@ public function addinvoice()
         else $orderline->colour_id = $post['colour_id'][$i];
 
         $orderline->units = $post['qty'][$i];
-   			$orderline->save();
+
+        $product_price = $products[$post['product_id'][$i]-1]->price($customer);
+        if(NULL !== $products[$post['product_id'][$i]-1]->price($customer))
+          $orderline->unit_price = $product_price;
+        else
+          $orderline->unit_price = $products[$post['product_id'][$i]-1]->unit_price;
+
+        
+   			
+        $orderline->sub_amount = $orderline->units * $orderline->unit_price;
+        $orderline->save();
+
+        $order->amount +=$orderline->sub_amount;
+
+        $order->save();
    		}
 
    		return redirect('order/'.$order->id);
@@ -135,23 +141,12 @@ public function addinvoice()
 
       ]);
 
+      $products = Product::all();
+      $customer = Customer::find($request->customer_id);
       $order = new Order;
       $order->customer_id = $request->customer_id;
 
-      if($request->is('orders/add'))
-      {   
-        
-        if($request->order_created_on=="0000-00-00")
-          $order->order_created_on = date('Y-m-d');
-        else 
-          $order->order_created_on = $request['order_created_on'];
-        
-        $order->invoice_received = "0000-00-00";
-        $order->order_status = 'draft';    
-      }
-      elseif($request->is('invoices/add'))
-      {  
-             
+      //ADDING INVOICE          
         if($request->invoice_date=="0000-00-00")
           $order->invoice_date = date('Y-m-d');   
         else 
@@ -160,7 +155,7 @@ public function addinvoice()
         $order->order_created_on = $order->invoice_date;
         $order->order_status = 'confirmed';
         $order->invoice_received = $request->invoice_received;
-      }
+      
 
       $hisab = Hisab::where('party_id','=',$order->customer_id)->where('status','=','ongoing')->first();
         
@@ -187,7 +182,22 @@ public function addinvoice()
         else $orderline->colour_id = $post['colour_id'][$i];
 
         $orderline->units = $post['qty'][$i];
+        
+        
+        $product_price = $products[$post['product_id'][$i]-1]->price($customer);
+        if(NULL !== $products[$post['product_id'][$i]-1]->price($customer))
+          $orderline->unit_price = $product_price;
+        else
+          $orderline->unit_price = $products[$post['product_id'][$i]-1]->unit_price;
+
+        
+        
+        $orderline->sub_amount = $orderline->units * $orderline->unit_price;
         $orderline->save();
+
+        $order->amount +=$orderline->sub_amount;
+
+        $order->save();
       }
 
       return redirect('order/'.$order->id);
