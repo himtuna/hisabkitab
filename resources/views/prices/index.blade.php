@@ -27,11 +27,11 @@
 						@foreach($products as $product)
 						<td>@if(NULL !==$product->price($customer))
 								Rs. {{$product->price($customer)}}
-								@else <span style="color:blue">Rs. {{$product->unit_price}}</span>
+								@else --
 								@endif								
 						</td>
 						@endforeach
-						<td><a href="{{url('products')}}"><i class="fa fa-pencil-square-o"></i></a></td>
+						<td><a href="{{url('customers/'.$customer->id.'/prices')}}"><i class="fa fa-pencil-square-o"></i></a></td>
 					</tr>
 				@endforeach
 			</tbody>

@@ -29,8 +29,23 @@ class HisabsController extends Controller
         // $hisabs = Hisab::all()->where('party_id',$customer->id);
         // return view('hisabs.view',compact('hisabs','customer'));
 
-        // $hisabs = Hisab::all();
-        return view('hisabs.index');
+        $hisabs = Hisab::all()->where('status','ongoing');
+
+        foreach($hisabs as $hisab){
+            if($hisab->status == "ongoing"){
+                $hisab->credit = 0;
+                $hisab->debit = 0;
+                foreach($hisab->orders as $order) {
+                    $hisab->credit += $order->amount;
+                }
+                foreach($hisab->payments as $payment) {
+                    $hisab->debit += $payment->debit;
+                }
+                $hisab->save();
+            }
+        }
+
+        return view('hisabs.index',compact('hisabs'));
     }
 
     /**

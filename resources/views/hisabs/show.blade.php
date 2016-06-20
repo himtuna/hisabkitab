@@ -26,7 +26,7 @@
             <span class="info-box-icon bg-aqua"><i class="fa fa-sign-out"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Credit</span>
+              <span class="info-box-text">Total Sales</span>
               <span class="info-box-number">Rs. {{$hisab->credit}}</span>
             </div>
             <!-- /.info-box-content -->
@@ -39,7 +39,7 @@
             <span class="info-box-icon bg-green"><i class="fa fa-sign-in"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">Debit</span>
+              <span class="info-box-text">Total Payment</span>
               <span class="info-box-number">Rs. {{$hisab->debit}}</span>
             </div>
             <!-- /.info-box-content -->
@@ -106,7 +106,7 @@
 					</a>
 					<div id="order-detail-{{$order->id}}" class="collapse">
 					@foreach($order->orderlines as $orderline)
-						{{$orderline->product->name}} {{$orderline->colour->name}}: {{$orderline->units}} {{$orderline->product->packaging_type}}  <span class="pull-right">x  Rs. {{$orderline->unit_price}} = Rs. {{$orderline->sub_amount}}</span> <br>
+						{{$orderline->product->name}} @if(isset($orderline->colour->name)){{$orderline->colour->name}} @endif: {{$orderline->units}} {{$orderline->product->packaging_type}}  <span class="pull-right">x  Rs. {{$orderline->unit_price}} = Rs. {{$orderline->sub_amount}}</span> <br>
 					@endforeach
 					</div>
 					</td>

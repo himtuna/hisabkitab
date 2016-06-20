@@ -25,7 +25,9 @@ Route::get('orders/draft','OrdersController@index'); // Draft orders
 Route::get('order/{id}','OrdersController@show');
 Route::get('order/{id}/delete','OrdersController@deleteOrder');
 
-Route::get('order/{id}/edit','OrdersController@edit');
+Route::get('order/{order}/edit','OrdersController@edit');
+Route::post('order/{order}/edit','OrdersController@modify');
+Route::patch('order/{order}/edit','OrdersController@modify');
 
 Route::patch('order/{id}','OrdersController@update');
 // Route::get('order/{id}/confirm','OrdersController@confirm');
@@ -43,6 +45,11 @@ Route::get('customers/orderstotal','CustomersController@orderstotal');
 
 Route::resource('products','ProductsController');
 Route::resource('customers','CustomersController');
+
+Route::get('customers/{customer}/prices','CustomerPricesController@index');
+Route::post('customers/{customer}/prices','CustomerPricesController@update');
+Route::patch('customers/{customer}/prices','CustomerPricesController@update');
+
 Route::resource('prices','PricesController');
 Route::resource('customers','CustomersController');
 Route::resource('colours','ColoursController');

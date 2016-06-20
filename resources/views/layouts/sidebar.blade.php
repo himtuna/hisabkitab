@@ -66,6 +66,8 @@
           </ul>
         </li>
 
+        <li class="{!! Request::is('hisab') ? 'active' : '' !!}"><a href="{{url('hisab')}}">Hisab</a></li>
+
         <li class="tree view {!! Request::is('products') ? 'active' : '' !!} {!! Request::is('colours') ? 'active' : '' !!}">
         <a href="#"><i class="fa fa-link"></i> <span>Products</span></a>
         <ul class="treeview-menu">

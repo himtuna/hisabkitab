@@ -47,7 +47,8 @@
 					<div class="alert alert-danger" role="alert">{{ $error }}</div>
 				@endforeach
 			@endif
-				<form action="{{action('OrdersController@store')}}" method="post">
+				<form action="{{url('order/'.$order->id.'/edit')}}" method="post">
+				{{ method_field('PATCH') }}
 				<div class="row">
 					<div class="col-lg-12">
 						

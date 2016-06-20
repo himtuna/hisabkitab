@@ -25,13 +25,16 @@ class OrdersController extends Controller
   {
     $this->middleware('auth');
   }
-    
+   
+   // index of all orders 
    public function index(Request $request)
    {
       // $url = $request['url']; var_dump($url);exit();
     	$orders = Order::all()->where('order_status','draft');
     	return view('orders.index', compact('orders'));
    }
+   
+   // index of confirmed orders
 
      public function indexConfirmed()
    {
@@ -312,9 +315,15 @@ public function addinvoice()
     	$order->order_status = "confirmed";
 
 
-        $order->update();
-        return redirect('/order/'.$order->id);
+      $order->update();
+      return redirect('/order/'.$order->id);
     } 
+
+    public function modify(Request $request, Order $order)
+    {
+      
+    }
+    
       
    
 }

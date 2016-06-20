@@ -15,6 +15,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">Payments</div>
 		<div class="panel-body">
+		<a href="{{url('payments/receivable/create')}}" class="pull-right btn btn-primary">Register new payment</a>
 			<table class="table table-bordered table-hover">
 				<thead>
 					<th class="col-sm-1">Payment ID</th>

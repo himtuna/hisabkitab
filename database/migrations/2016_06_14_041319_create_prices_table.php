@@ -18,7 +18,7 @@ class CreatePricesTable extends Migration
             $table->integer('product_id')->unsigned()->index();
             $table->smallInteger('unit_price');
             // $table->enum('isdefault', ['No', 'Yes','Lost']);
-            $table->boolean('isdefault');
+            $table->boolean('isdefault'); //get rid of this
             $table->timestamps();
         });
     }

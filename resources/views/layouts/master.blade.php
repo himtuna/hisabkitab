@@ -29,6 +29,7 @@
 
   <!-- jQuery 2.2.0 -->
   <script src="{{asset('/assets/jquery/jquery-2.2.0.min.js')}}"></script>
+  @yield('script_head')
 
 </head>
 <!--
